@@ -4,8 +4,7 @@ import serial
 import time
 
 # Change if your port is different
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-
+ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
 time.sleep(2)  # wait for ESP32 reset
 
 while True:
