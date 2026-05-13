@@ -1,21 +1,21 @@
-# This script allows you to send commands to an Arduino over serial.
-# this is for servo_serial.ino
+# This script sends serial commands from the Pi to the ESP32
+
 import serial
 import time
 
-# Change this to your Arduino port
+# Change if your port is different
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 
-time.sleep(2)  # wait for Arduino to reset
+time.sleep(2)  # wait for ESP32 reset
 
 while True:
-    command = input("Enter command (move / other): ")
 
-    ser.write((command + '\n').encode())  # send command
+    angle = input("Enter servo angle (0-180): ")
+
+    ser.write((angle + '\n').encode())
 
     time.sleep(0.1)
 
-    # read response from Arduino (optional)
     if ser.in_waiting > 0:
         response = ser.readline().decode().strip()
-        print("Arduino:", response)
+        print("ESP32:", response)
